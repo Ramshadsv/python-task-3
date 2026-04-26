@@ -111,5 +111,5 @@ Database is created automatically on first run.
 
 ---
 
-*Submitted by: [Your Name] | Maincrafts Technology – Python Full Stack Internship*
+*Submitted by: Mohammed Rishan | Maincrafts Technology – Python Full Stack Internship*
 # python-task-3
