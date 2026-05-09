@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard – StudentManager</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<div class="navbar">
+  <a href="/dashboard" class="brand">StudentManager</a>
+  <nav>
+    <a href="/dashboard" class="active">Dashboard</a>
+    <a href="/students">Students</a>
+    <a href="/add-student">Add Student</a>
+    <a href="/logout">Logout</a>
+  </nav>
+</div>
+<div class="container">
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% for cat, msg in messages %}
+      <div class="alert alert-{{ cat }}">{{ msg }}</div>
+    {% endfor %}
+  {% endwith %}
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="number">{{ total }}</div>
+      <div class="label">Total Students</div>
+    </div>
+    <div class="stat-card">
+      <div class="number" style="color:#22c55e">OK</div>
+      <div class="label">Logged in as <strong>{{ username }}</strong></div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header"><h2>Welcome, {{ username }}!</h2></div>
+    <p style="color:var(--muted);margin-bottom:1.5rem">
+      You are logged in to the Student Management System. Use the navigation above to manage student records.
+    </p>
+    <div class="row">
+      <a href="/students" class="btn btn-primary">View All Students</a>
+      <a href="/add-student" class="btn btn-secondary">Add New Student</a>
+    </div>
+  </div>
+</div>
+</body>
+</html>

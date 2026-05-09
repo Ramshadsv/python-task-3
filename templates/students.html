@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Students – StudentManager</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<div class="navbar">
+  <a href="/dashboard" class="brand">StudentManager</a>
+  <nav>
+    <a href="/dashboard">Dashboard</a>
+    <a href="/students" class="active">Students</a>
+    <a href="/add-student">Add Student</a>
+    <a href="/logout">Logout</a>
+  </nav>
+</div>
+<div class="container">
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% for cat, msg in messages %}
+      <div class="alert alert-{{ cat }}">{{ msg }}</div>
+    {% endfor %}
+  {% endwith %}
+  <div class="card">
+    <div class="card-header">
+      <h2>All Students</h2>
+      <a href="/add-student" class="btn btn-primary btn-sm">+ Add Student</a>
+    </div>
+    {% if students %}
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr><th>#</th><th>Name</th><th>Email</th><th>Course</th><th>Actions</th></tr>
+        </thead>
+        <tbody>
+        {% for s in students %}
+        <tr>
+          <td>{{ s['id'] }}</td>
+          <td>{{ s['name'] }}</td>
+          <td>{{ s['email'] }}</td>
+          <td>{{ s['course'] }}</td>
+          <td>
+            <div class="actions">
+              <a href="/edit/{{ s['id'] }}" class="btn btn-secondary btn-sm">Edit</a>
+              <a href="/delete/{{ s['id'] }}" class="btn btn-danger btn-sm"
+                 onclick="return confirm('Delete this student?')">Delete</a>
+            </div>
+          </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% else %}
+    <div class="empty-state">
+      <p>No students found.</p>
+      <a href="/add-student" class="btn btn-primary">Add your first student</a>
+    </div>
+    {% endif %}
+  </div>
+</div>
+</body>
+</html>
